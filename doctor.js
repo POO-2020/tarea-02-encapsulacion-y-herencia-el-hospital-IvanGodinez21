@@ -6,12 +6,12 @@ export default class Doctor {
      * @param {number} telefono
      */
     constructor (cedula, especialidad, nombre, telefono) {
-        this.cedula = cedula
-        this.especialidad = especialidad
-        this.nombre = nombre
-        this.telefono = telefono
+        this._cedula = cedula
+        this._especialidad = especialidad
+        this._nombre = nombre
+        this._telefono = telefono
     }
     getPerfildoc() {
-        return `Doctor: ${this.nombre.getNombreCompleto()}\nCedula: ${this.cedula}\nEspecialidad: ${this.especialidad}\nTeléfono: ${this.telefono}`
+        return `Doctor: ${this._nombre.getNombreCompleto()}\nCedula: ${this._cedula}\nEspecialidad: ${this._especialidad}\nTeléfono: ${this._telefono}`
     }
 }

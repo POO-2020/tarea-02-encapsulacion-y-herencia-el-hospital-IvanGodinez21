@@ -5,15 +5,15 @@ export default class Tiempo {
      * @param {string} periodos 
      */
     constructor(hora, minutos, periodos) {
-        this.hora = hora
-        this.minutos = minutos
-        this.periodos = periodos.toLowerCase()
+        this._hora = hora
+        this._minutos = minutos
+        this._periodos = periodos.toLowerCase()
     }
 
     getFormato24() {
-        let hora = this.hora
-        let minutos = this.minutos
-        let periodos = this.periodos
+        let hora = this._hora
+        let minutos = this._minutos
+        let periodos = this._periodos
         if (periodos === "pm") {
             hora = hora + 12
             return `${hora}:${minutos}`
@@ -21,9 +21,9 @@ export default class Tiempo {
         return `${hora}:${minutos}`
     }
     getFormato12() {
-        let hora = this.hora
-        let minutos = this.minutos
-        let periodos = this.periodos
+        let hora = this._hora
+        let minutos = this._minutos
+        let periodos = this._periodos
         if (hora >= 12) {
             periodos = "pm"
             hora = hora - 12

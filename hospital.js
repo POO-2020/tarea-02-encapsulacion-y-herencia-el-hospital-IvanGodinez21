@@ -5,26 +5,26 @@ export default class Hospital {
      * @param {direccion} direccion 
      */
     constructor (nombre, direccion) {
-        this.nombre = nombre
-        this.direccion = direccion
-        this.listadocs = new Array()
-        this.listacita = new Array()
+        this._nombre = nombre
+        this._direccion = direccion
+        this._listadocs = new Array()
+        this._listacita = new Array()
     }
     registrarDoctor(doctor) {
-        this.listadocs.push(doctor)
+        this._listadocs.push(doctor)
     }
     listarDoctores() {
         console.log("---Doctores---")
-        this.listadocs.forEach((doctor, i) => {
+        this._listadocs.forEach((doctor, i) => {
             console.log(`${i+1}. ${doctor.getPerfildoc()}`)
         })
     }
     registrarCita(cita) {
-        this.listacita.push(cita)
+        this._listacita.push(cita)
     }
     listarCitas() {
         console.log("---Citas---")
-        this.listacita.forEach((cita, i) => {
+        this._listacita.forEach((cita, i) => {
             console.log(`${i+1}. ${cita.getCita()}`)
         })
     }

@@ -5,6 +5,7 @@ import Paciente from "./paciente.js";
 import Doctor from "./doctor.js";
 import Cita from "./cita.js";
 import Hospital from "./hospital.js";
+import PacienteAsegurado from "./pacienteasegurado.js"
 
 class Main {
     probarFecha() {
@@ -85,6 +86,18 @@ class Main {
         hospital.registrarCita(cita2);
         hospital.listarCitas();
     }
+    probarPacienteAsegurado() {
+        console.log(`<---------Paciente Asegurado--------->`)
+        let pacienteasegurado = new PacienteAsegurado({
+            nombre: new Nombre("Juan", "Perez", "Dias"),
+            fecha: new Fecha(21,12,2000),
+            numero: "3121205979",
+            numeropoliza: "20161101",
+            fechavigencia: new Fecha(21, 12, 2020),
+            compañia: "MyMind"
+        })
+        console.log(`${pacienteasegurado.getPerfil()}`)
+    }
 }
 
 let app = new Main
@@ -95,3 +108,4 @@ app.probarPaciente();
 app.probarDoctor();
 app.probarCita();
 app.probarHospital();
+app.probarPacienteAsegurado();

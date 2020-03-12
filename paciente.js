@@ -5,11 +5,11 @@ export default class Paciente {
      * @param {number} numero
      */
      constructor(nombre, fecha, numero) {
-         this.nombre = nombre
-         this.fecha = fecha
-         this.numero = numero
+         this._nombre = nombre
+         this._fecha = fecha
+         this._numero = numero
      }
      getPerfil() {
-        return `${this.nombre.getNombreCompleto()}\nFecha de registro: ${this.fecha.getFecha()}\nNúmero de Teléfono: ${this.numero}`
+        return `${this._nombre.getNombreCompleto()}\nFecha de registro: ${this._fecha.getFecha()}\nNúmero de Teléfono: ${this._numero}`
      }
 }
