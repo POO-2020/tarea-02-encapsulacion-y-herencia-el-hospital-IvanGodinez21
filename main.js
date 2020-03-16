@@ -7,6 +7,31 @@ import Cita from "./cita.js";
 import Hospital from "./hospital.js";
 import PacienteAsegurado from "./pacienteasegurado.js"
 
+//DOCTORES
+const docA = new Doctor ({
+    cedula: 3123123,
+    especialidad: "Pediatra",
+    nombre: new Nombre("Manuel", "Ramirez", "Ortega"),
+    telefono: 31212059347
+});
+const docB = new Doctor ({
+    cedula: 23435032,
+    especialidad:"Cirujano",
+    nombre: new Nombre("Ramon", "Castro", "Campos"),
+    telefono: 31256371
+});
+//PACIENTES
+const pacA = new Paciente ({
+    nombre: new Nombre("Juan", "Perez", "Ortega"),
+    fecha: new Fecha(21, 12, 2000),
+    numero: 3121205571
+});
+const pacB = new Paciente({
+    nombre: new Nombre("Antonio", "Gonzales", "Velazques"),
+    fecha: new Fecha (10, 11, 1997),
+    numero: "312445673",
+});
+
 class Main {
     probarFecha() {
         console.log(`<---------Fecha--------->`);
@@ -41,43 +66,65 @@ class Main {
     }
     probarPaciente() {
         console.log(`<---------Pacientes--------->`)
-        let fecha = new Fecha(19, 2 , 2000);
-        let nombre = new Nombre("Juan", "Perez", "Ortega")
-        let paciente = new Paciente(nombre, fecha, 3121206971);
+        let paciente = new Paciente({
+            nombre: new Nombre("Juan", "Perez", "Ortega"),
+            fecha: new Fecha(19, 2 , 2000),
+            telefono: 3121206971
+        });
         console.log(`${paciente.getPerfil()}`);
+    }
+    probarPacienteAsegurado() {
+        console.log(`<---------Paciente Asegurado--------->`)
+        let pacienteasegurado = new PacienteAsegurado({
+            nombre: new Nombre("Juan", "Perez", "Dias"),
+            fecha: new Fecha(21, 12, 2000),
+            telefono: 3121205979,
+            numeropoliza: "20161101",
+            fechavigencia: new Fecha(21, 12, 2020),
+            compañia: "MyMind"
+        });
+        console.log(`${pacienteasegurado.getPerfil()}`)
     }
     probarDoctor() {
         console.log(`<---------Doctor--------->`)
-        let doctor = new Doctor(3124305, "Traumatologo", new Nombre("Manuel", "Ramirez", "Ortega"), 3121205571);
+        let doctor = new Doctor({
+            cedula: 3124305, 
+            especialidad: "Traumatologo", 
+            nombre: new Nombre("Manuel", "Ramirez", "Ortega"),
+            telefono: 3121205571
+        });
         console.log(`${doctor.getPerfildoc()}`)
     }
     probarCita() {
         console.log(`<---------Cita--------->`)
-        let cita = new Cita(
-            new Fecha(23, 2, 2020), 
-            new Tiempo(10, 30, "am"), 
-            new Doctor (3123123, "Pediatra", new Nombre("Manuel", "Ramirez", "Ortega"), 31212059347),
-            new Paciente (new Nombre("Juan", "Perez", "Ortega"), new Fecha(21, 12, 2000), 3121205571)
-        );
+        let cita = new Cita({
+            nocita: Math.trunc((Math.random() * (100 - 0) + 0)),
+            fecha: new Fecha(23, 2, 2020), 
+            hora: new Tiempo(10, 30, "am"), 
+            doctor: docA,
+            paciente: pacA
+        });
         console.log(`${cita.getCita()}`)
     }
     probarHospital() {
         console.log(`<---------Hospital--------->`)
         let hospital = new Hospital("Puerta de cobre", "Bosques 1120")
-        let doctor1 = new Doctor(3124305, "Traumatologo", new Nombre("Raul", "Gonzalez", "Hernandez"), 3121205571);
-        let doctor2 = new Doctor(3124306, "Traumatologo", new Nombre("Enrique", "Ramirez", "Torres"), 3121205572);
-        let cita1 = new Cita(
-            new Fecha(21, 12, 2000), 
-            new Tiempo(10,30, "am"), 
-            new Doctor(3124307, "Cirujano", new Nombre("Alberto", "Roamon", "Ramirez"), 3121205971), 
-            new Paciente(new Nombre ("Luis", "Eduardo", "Leyva"), new Fecha(21, 12, 2000), 3121205978)
-        );
-        let cita2 = new Cita(
-            new Fecha(21, 12, 2000), 
-            new Tiempo(10,30, "am"), 
-            new Doctor(3124307, "Traumatologo", new Nombre("Jose", "Roamon", "Godínez"), 3121205971), 
-            new Paciente(new Nombre ("Luis", "Eduardo", "Leyva"), new Fecha(21, 12, 2000), 3121205978)
-        );
+        let doctor1 = docA;
+        let doctor2 = docB;
+        let cita1 = new Cita({
+            nocita: 1,
+            fecha: new Fecha(23, 2, 2020), 
+            hora: new Tiempo(10, 30, "am"), 
+            doctor: docA,
+            paciente: pacA
+        });
+        let cita2 = new Cita({
+            nocita: 2,
+            fecha: new Fecha(20, 3, 2020), 
+            hora: new Tiempo(10, 30, "am"), 
+            doctor: docA,
+            paciente: pacA
+        });
 
         hospital.registrarDoctor(doctor1);
         hospital.registrarDoctor(doctor2);
@@ -86,18 +133,6 @@ class Main {
         hospital.registrarCita(cita2);
         hospital.listarCitas();
     }
-    probarPacienteAsegurado() {
-        console.log(`<---------Paciente Asegurado--------->`)
-        let pacienteasegurado = new PacienteAsegurado({
-            nombre: new Nombre("Juan", "Perez", "Dias"),
-            fecha: new Fecha(21,12,2000),
-            numero: "3121205979",
-            numeropoliza: "20161101",
-            fechavigencia: new Fecha(21, 12, 2020),
-            compañia: "MyMind"
-        })
-        console.log(`${pacienteasegurado.getPerfil()}`)
-    }
 }
 
 let app = new Main
@@ -105,7 +140,7 @@ app.probarFecha();
 app.probarTiempo();
 app.probarNombre();
 app.probarPaciente();
+app.probarPacienteAsegurado();
 app.probarDoctor();
 app.probarCita();
 app.probarHospital();
-app.probarPacienteAsegurado();

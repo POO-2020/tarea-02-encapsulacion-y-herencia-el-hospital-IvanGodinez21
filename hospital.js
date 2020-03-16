@@ -11,7 +11,32 @@ export default class Hospital {
         this._listacita = new Array()
     }
     registrarDoctor(doctor) {
+        if (this._buscarDoctor(doctor) != null) {
+            return false;
+        }
         this._listadocs.push(doctor)
+        return true;
+    }
+    _buscarDoctor(doctor) {
+        let result = this._listadocs.find(e => e.esIgualA(doctor));
+    }
+    eliminarDoctor(doctor) {
+        let result = this._buscarDoctor(doctor)
+
+        if (result < 0) {
+            return false 
+        }
+        this._listadocs.splice(result, 1)
+        return true
+    }
+    actualizarDoctor(doctor, nuevoDoctor) {
+        let result = this._buscarDoctor(doctor)
+        
+        if (result < 0) {
+            return false
+        }
+        this._listadocs.splice(result, 1, nuevoDoctor)
+        return true
     }
     listarDoctores() {
         console.log("---Doctores---")
@@ -20,7 +45,14 @@ export default class Hospital {
         })
     }
     registrarCita(cita) {
+        if (this._buscarCita(cita) != null) {
+            return false
+        }
         this._listacita.push(cita)
+        return true;
+    }
+    _buscarCita(cita) {
+        let result = this._listacita.find(c => c.esIgualA(cita));
     }
     listarCitas() {
         console.log("---Citas---")
