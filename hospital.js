@@ -10,18 +10,18 @@ export default class Hospital {
         this._listadocs = new Array()
         this._listacita = new Array()
     }
+    buscarDoctor(doctor) {
+        let result = this._listadocs.find(e => e.esIgualA(doctor));
+    }
     registrarDoctor(doctor) {
-        if (this._buscarDoctor(doctor) != null) {
+        if (this.buscarDoctor(doctor) != null) {
             return false;
         }
         this._listadocs.push(doctor)
         return true;
     }
-    _buscarDoctor(doctor) {
-        let result = this._listadocs.find(e => e.esIgualA(doctor));
-    }
     eliminarDoctor(doctor) {
-        let result = this._buscarDoctor(doctor)
+        let result = this.buscarDoctor(doctor)
 
         if (result < 0) {
             return false 
@@ -30,7 +30,7 @@ export default class Hospital {
         return true
     }
     actualizarDoctor(doctor, nuevoDoctor) {
-        let result = this._buscarDoctor(doctor)
+        let result = this.buscarDoctor(doctor)
         
         if (result < 0) {
             return false
@@ -44,15 +44,33 @@ export default class Hospital {
             console.log(`${i+1}. ${doctor.getPerfildoc()}`)
         })
     }
+    buscarCita(cita) {
+        let result = this._listacita.find(c => c.esIgualA(cita));
+    }
     registrarCita(cita) {
-        if (this._buscarCita(cita) != null) {
+        if (this.buscarCita(cita) != null) {
             return false
         }
         this._listacita.push(cita)
-        return true;
+        return true
     }
-    _buscarCita(cita) {
-        let result = this._listacita.find(c => c.esIgualA(cita));
+    eliminarCita(cita) {
+        let result = this.buscarCita(cita)
+
+        if (result < 0) {
+            return false 
+        }
+        this._listacita.splice(result, 1)
+        return true
+    }
+    actualizarCita(cita, nuevaCita) {
+        let result = this.buscarCita(cita)
+
+        if (result < 0) {
+            return false 
+        }
+        this._listacita.splice(result, 1, nuevaCita)
+        return true
     }
     listarCitas() {
         console.log("---Citas---")

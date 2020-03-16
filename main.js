@@ -16,10 +16,17 @@ const docA = new Doctor ({
 });
 const docB = new Doctor ({
     cedula: 23435032,
-    especialidad:"Cirujano",
+    especialidad: "Cirujano",
     nombre: new Nombre("Ramon", "Castro", "Campos"),
     telefono: 31256371
 });
+const docC = new Doctor ({
+    cedula:24566323,
+    especialidad: "Oftalmologo",
+    nombre: new Nombre("Everardo", "Castro", "Flores"),
+    telefono: 21345556
+});
+
 //PACIENTES
 const pacA = new Paciente ({
     nombre: new Nombre("Juan", "Perez", "Ortega"),
@@ -29,7 +36,12 @@ const pacA = new Paciente ({
 const pacB = new Paciente({
     nombre: new Nombre("Antonio", "Gonzales", "Velazques"),
     fecha: new Fecha (10, 11, 1997),
-    numero: "312445673",
+    numero: "312445673"
+});
+const pacC = new Paciente({
+    nombre: new Nombre("Oscar Alfredo", "Ramirez", "Valenciana"),
+    fecha: new Fecha (16, 10, 1999),
+    numero: 3121222434
 });
 
 class Main {
@@ -111,6 +123,7 @@ class Main {
         let hospital = new Hospital("Puerta de cobre", "Bosques 1120")
         let doctor1 = docA;
         let doctor2 = docB;
+        let doctor3 = docC;
         let cita1 = new Cita({
             nocita: 1,
             fecha: new Fecha(23, 2, 2020), 
@@ -121,16 +134,27 @@ class Main {
         let cita2 = new Cita({
             nocita: 2,
             fecha: new Fecha(20, 3, 2020), 
-            hora: new Tiempo(10, 30, "am"), 
-            doctor: docA,
-            paciente: pacA
+            hora: new Tiempo(10, 50, "am"), 
+            doctor: docB,
+            paciente: pacB
+        });
+        let cita3 = new Cita({
+            nocita: 3,
+            fecha: new Fecha(20, 5, 2020), 
+            hora: new Tiempo(10, 10, "am"), 
+            doctor: docC,
+            paciente: pacC
         });
 
         hospital.registrarDoctor(doctor1);
         hospital.registrarDoctor(doctor2);
+        hospital.eliminarDoctor(doctor2);
+        hospital.actualizarDoctor(doctor1, doctor3);
         hospital.listarDoctores();
         hospital.registrarCita(cita1);
         hospital.registrarCita(cita2);
+        hospital.eliminarCita(cita2)
+        hospital.actualizarCita(cita1, cita3)
         hospital.listarCitas();
     }
 }
